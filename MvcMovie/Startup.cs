@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MvcMovie
 {
@@ -31,6 +32,8 @@ namespace MvcMovie
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddMvc(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
 
             services.AddDbContext<MvcMovieContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
